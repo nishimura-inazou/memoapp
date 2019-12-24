@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::resource('memo','MemoController');
+Route::resource('dustbox','DustboxController');
+Route::get('/all-del','DustboxController@all_del');
