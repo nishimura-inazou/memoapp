@@ -9,7 +9,8 @@ class MemoController extends Controller
 {
     public function index(){
 
-        $memos = Memo::where('is_dusted','==',false)->get();
+        //$memos = Memo::where('is_dusted','==',false)->get();                  //Modelを使ったCRUD操作
+        $memos = \DB::table('memos')->where('is_dusted','==',false)->get();     //Modelを使わないCRUD操作
         $dusted_memos = Memo::where('is_dusted','!=',false)->get();
 
         return view('memo/index',compact('memos','dusted_memos'));
