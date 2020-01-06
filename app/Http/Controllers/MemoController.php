@@ -57,4 +57,21 @@ class MemoController extends Controller
         return redirect('/memo');
     }
 
+
+    public function test(Request $request){
+        $postData = $request->all();
+        return view('test',compact('postData'));
+    }
+
+    public function test_get(Request $request){
+        $postData = $request->all();
+
+        return view('test',compact('postData'));
+    }
+
+    public function test_post(Request $request){
+        $postData = $request->all();
+
+        return view('test',compact('postData'));
+    }
 }
