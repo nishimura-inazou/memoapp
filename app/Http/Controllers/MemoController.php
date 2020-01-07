@@ -7,10 +7,29 @@ use App\Memo;
 
 class MemoController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
-        //$memos = Memo::where('is_dusted','==',false)->get();                  //Modelを使ったCRUD操作
-        $memos = \DB::table('memos')->where('is_dusted','==',false)->get();     //Modelを使わないCRUD操作
+        $postData = $request->all();
+        if(empty($postData)){
+            $searchTitle = '';
+            $searchContents = '';
+        }else{
+            $searchTitle = $postData['searchTitle'];
+            $searchContents = $postData['searchContents'];
+        }
+
+        /* Modelを使ったCRUD操作
+        $memos = Memo::where('is_dusted','==',false)
+                ->get();
+        */
+
+        //Modelを使わないCRUD操作
+        $memos = \DB::table('memos')
+                ->where('is_dusted','==',false)
+                ->where('title','LIKE',"%$searchTitle%")
+                ->where('contents','LIKE',"%$searchContents%")
+                ->get();
+
         $dusted_memos = Memo::where('is_dusted','!=',false)->get();
 
         return view('memo/index',compact('memos','dusted_memos'));
@@ -41,12 +60,22 @@ class MemoController extends Controller
     }
 
     public function store(Request $request){
+        
         $memo = new Memo();
 
         $memo->title = $request->title;
         $memo->contents = $request->contents;
         $memo->save();
         return redirect('/memo');
+
+        /*
+        $postData = $request->all();
+        $searchString = $request->searchString;
+
+        $memos = Memo::where('title','LIKE',"%$searchString\n%")->get();
+        $dusted_memos = Memo::where('is_dusted','!=',false)->get();
+        return view('memo/index',compact('memos','dusted_memos'));
+        */
     }
 
     public function destroy($id){

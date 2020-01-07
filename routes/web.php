@@ -15,7 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('memo','MemoController');
+//Route::resource('memo','MemoController');
+Route::get('memo','MemoController@index')->name('memo.index');
+Route::post('memo','MemoController@store')->name('memo.store');
+Route::get('memo/create','MemoController@create')->name('memo.create');
+Route::get('memo{memo}','MemoController@show')->name('memo.show');
+Route::put('memo{memo}','MemoController@update')->name('memo.update');
+Route::delete('memo{memo}','MemoController@destroy')->name('memo.destroy');
+Route::get('memo{memo}/edit','MemoController@edit')->name('memo.edit');
+
+
+
+
+
 Route::resource('dustbox','DustboxController');
 Route::get('/all-del','DustboxController@all_del');
 

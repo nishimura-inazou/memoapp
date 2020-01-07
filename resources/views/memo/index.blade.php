@@ -17,8 +17,9 @@
             </div>
 
             <div class="row">
-                <div class="col-md-10 offset-1">
+                <div class="col-md-2 offset-1">
                     <a href="/memo/create" class="btn btn-primary">＋新規メモ</a>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">メモを検索</button>
                 </div>
             </div>
 
@@ -47,20 +48,46 @@
                     </tbody>
                 </table>
             </div>
-
-
-
             <div class="row">
                 <div class="col-md-10 offset-1">
                     <h4><a href="/dustbox">●ゴミ箱 ({{ $dusted_memos->count() }})</a></h4>
                 </div>
             </div>
-
-
         </div>
 
         <footer>
         </footer>
+
+        <!-- 検索モーダル -->
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>メモを検索</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="search" method="GET" action="memo">
+                        <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="searchTitle" class="control-label">タイトル</label>
+                                    <input type="text" class="form-control" id="searchTitle" name="searchTitle">
+                                </div>
+                                <div class="form-group">
+                                    <label for="searchContents" class="control-label">コンテンツ</label>
+                                    <input type="text" class="form-control" id="searchContents" name="searchContents">
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-outline-secondary" data-dismiss="modal">戻る</a>
+                            <button type="submit" class="btn btn-primary" form="search">検索</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </body>
