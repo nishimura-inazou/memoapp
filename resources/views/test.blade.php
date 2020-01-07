@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label for="age" class="control-label">年齢</label>
                         <select class="form-control" id="age" name="age">
-                            <option value="0"></option>
+                            <option></option>
                             <option value="1">20歳未満</option>
                             <option value="2">21～30歳</option>
                             <option value="3">31～40歳</option>
