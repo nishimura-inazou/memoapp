@@ -70,14 +70,26 @@
                     </div>
                     <form id="search" method="GET" action="memo">
                         <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="searchTitle" class="control-label">タイトル</label>
-                                    <input type="text" class="form-control" id="searchTitle" name="searchTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="searchContents" class="control-label">コンテンツ</label>
-                                    <input type="text" class="form-control" id="searchContents" name="searchContents">
-                                </div>
+                            <div class="form-group">
+                                <label><input type="radio" value="0" name="memoClassCheck" checked="checked">指定しない</label>
+                                <label><input type="radio" value="1" name="memoClassCheck">指定する</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="memoClass">
+                                <select class="form-control" id="memoClass" name="memoClass">
+                                    <option value="">----</option>
+                                    <option value=0">タイトルから検索</option>
+                                    <option value="1">コンテンツから検索</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="searchTitle" class="control-label">タイトル</label>
+                                <input type="text" class="form-control" id="searchTitle" name="searchTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="searchContents" class="control-label">コンテンツ</label>
+                                <input type="text" class="form-control" id="searchContents" name="searchContents">
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <a class="btn btn-outline-secondary" data-dismiss="modal">戻る</a>
