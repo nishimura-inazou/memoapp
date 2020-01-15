@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Services\CommonService;
 use App\Memo;
 
 class MemoController extends Controller
 {
+
+    protected $service;
+
+    public function __constract(CommonService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index(Request $request){
 
         $postData = $request->all();
@@ -24,11 +34,16 @@ class MemoController extends Controller
         */
 
         //Modelを使わないCRUD操作
-        $memos = \DB::table('memos')
-                ->where('is_dusted','==',false)
-                ->where('title','LIKE',"%$searchTitle%")
-                ->where('contents','LIKE',"%$searchContents%")
-                ->get();
+        $memos = [];
+        $sqlData = \DB::table('memos as a');
+        $sqlData->select('a.id'
+                       , 'a.title'
+                       , 'a.contents'
+        );
+        $sqlData->where('is_dusted','==','false');
+        $sqlData->where('title','LIKE',"%$searchTitle%");
+        $sqlData->where('title','LIKE',"%$searchContents%");
+        $memos = $sqlData->get();
 
         $dusted_memos = Memo::where('is_dusted','!=',false)->get();
 
@@ -60,7 +75,7 @@ class MemoController extends Controller
     }
 
     public function store(Request $request){
-        
+
         $memo = new Memo();
 
         $memo->title = $request->title;
@@ -89,18 +104,9 @@ class MemoController extends Controller
 
     public function test(Request $request){
         $postData = $request->all();
-        return view('test',compact('postData'));
+
+
+        return view('test')->with($data);
     }
 
-    public function test_get(Request $request){
-        $postData = $request->all();
-
-        return view('test',compact('postData'));
-    }
-
-    public function test_post(Request $request){
-        $postData = $request->all();
-
-        return view('test',compact('postData'));
-    }
 }
