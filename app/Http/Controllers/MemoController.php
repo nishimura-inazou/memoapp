@@ -7,6 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Services\CommonService;
 use App\Memo;
 
+// PhpSpreadsheetの参照追加
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+
 class MemoController extends Controller
 {
 
@@ -107,6 +114,24 @@ class MemoController extends Controller
 
 
         return view('test')->with($data);
+    }
+
+    public function export(){
+
+        // Excelインスタンス作成
+        $spreadsheet = new Spreadsheet();
+        // 既存のシートを選択
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // データの書き込み
+        $sheet->setCellValue('A1','Hello hoge!');
+
+        // ファイルの保存
+        $filePath = '../storage/';
+        $fileName = 'hoge.xlsx';
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($filePath.$fileName);
+
     }
 
 }

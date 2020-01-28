@@ -24,7 +24,7 @@ Route::put('memo{memo}','MemoController@update')->name('memo.update');
 Route::delete('memo{memo}','MemoController@destroy')->name('memo.destroy');
 Route::get('memo{memo}/edit','MemoController@edit')->name('memo.edit');
 
-
+Route::any('memo/export','MemoController@export')->name('memo.export');
 
 
 
