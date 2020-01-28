@@ -126,12 +126,13 @@ class MemoController extends Controller
         // データの書き込み
         $sheet->setCellValue('A1','Hello hoge!');
 
-        // ファイルの保存
-        $filePath = '../storage/';
-        $fileName = 'hoge.xlsx';
+        // ダウンロード
+        $fileName = 'HelloHoge.xlsx';
+        header('Content-Disposition: attachment; filename=' . mb_convert_encoding($fileName, 'SJIS-win', 'UTF-8'));
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         $writer = new Xlsx($spreadsheet);
-        $writer->save($filePath.$fileName);
+        $writer->save('php://output');
+
 
     }
-
 }
