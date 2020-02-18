@@ -35,4 +35,5 @@ Route::get('/all-del','DustboxController@all_del');
 Route::get('test','MemoController@test_get');
 Route::post('test','MemoController@test_post');
 */
-Route::any('test','MemoController@test');
+Route::any('test','MemoController@test')->name('memo.test');
+Route::any('test/download','MemoController@download')->name('memo.download');

@@ -109,13 +109,6 @@ class MemoController extends Controller
     }
 
 
-    public function test(Request $request){
-        $postData = $request->all();
-
-
-        return view('test')->with($data);
-    }
-
     public function export(){
 
         // Excelインスタンス作成
@@ -133,6 +126,21 @@ class MemoController extends Controller
         $writer = new Xlsx($spreadsheet);
         $writer->save('php://output');
 
+
+    }
+
+    public function test(Request $request)
+    {
+        return view('test');
+    }
+
+    public function download()
+    {
+        $pathToFile = 'test.txt';
+        $fileName = 'test.txt';
+
+        $headers = ['Content-Type' => 'text/csv'];
+        return response()->download($pathToFile, $fileName, $headers);
 
     }
 }
