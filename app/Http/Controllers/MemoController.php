@@ -136,7 +136,8 @@ class MemoController extends Controller
 
     public function download()
     {
-        $pathToFile = 'test.txt';
+        // $pathToFile = 'test.txt';
+        $pathToFile = '../jisyo/1.txt';
         $fileName = 'test.txt';
 
         $headers = ['Content-Type' => 'text/csv'];
